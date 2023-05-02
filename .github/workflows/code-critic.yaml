@@ -8,6 +8,8 @@ jobs:
   analyze-code:
     name: Test action
     runs-on: ubuntu-latest
+    outputs:
+      sarif: ${{ steps.convert-sarif.outputs.sarif }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -44,12 +46,16 @@ jobs:
           echo "Package: $package"
 
           curl -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "${package}" https://tuneer.cis188.org/analyze -o results.json
-          cat results.json | jq -r '.[] | @sh "##vso[results.publish type=Sarif;]$(jq -r tostring {})"' > results.sarif
 
+      - name: Convert JSON to SARIF
+        id: convert-sarif
+        run: |
+          echo "::set-output name=sarif::$(cat results.json | jq -r '.[] | @sh "##vso[results.publish type=Sarif;]$(jq -r tostring {})"')"      
+      
       - name: Upload results
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: results.sarif
+          sarif_file: ${{ steps.convert-sarif.outputs.sarif }}
         env:
           TOKEN: ${{ secrets.TOKEN }}
 
