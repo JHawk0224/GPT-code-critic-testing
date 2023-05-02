@@ -52,3 +52,5 @@ jobs:
           sarif_file: results.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+# ADDED A NEW LINE FOR TESTING LMAO
