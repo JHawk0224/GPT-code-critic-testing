@@ -37,7 +37,7 @@ jobs:
           cat test.sarif
 
       - name: Upload results
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: test.sarif
         env:
