@@ -8,6 +8,7 @@ jobs:
   analyze-code:
     name: Test action
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -56,4 +57,3 @@ jobs:
           sarif_file: test.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        permissions: write-all
