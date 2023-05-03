@@ -41,6 +41,6 @@ response = requests.post('https://tuneer.cis188.org/analyze', json=package)
 
 # write the results to a file called "results.sarif"
 with open('results.sarif', 'w') as f:
-    f.write(response.analysis.text)
+    f.write(response.text.analysis)
 
 print('Analysis complete. Results written to "results.sarif"')
