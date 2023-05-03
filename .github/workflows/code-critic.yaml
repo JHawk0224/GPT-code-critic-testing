@@ -49,12 +49,11 @@ jobs:
       - name: Debug
         run: |
           cat test.sarif
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Upload results
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: test.sarif
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        permissions: write-all
