@@ -4,9 +4,4 @@ print('hello')
 
 print('world')
 
-print('this is my code diff')
-
-prnt('TYPO LMAOOO')
-
-prnt('hi')
-
+prnt('this is my code diff')
